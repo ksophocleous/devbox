@@ -13,8 +13,13 @@
     - name: install build-essential
       sudo: yes
       apt: pkg=build-essential state=latest
+    - name: install cmake
+      sudo: yes
+      apt: pkg=cmake state=latest
+    - name: build and install libsodium
+      git: repo=ssh://git@github.com/ksophocleous/libsodium.git dest=/root/libsodium accept_hostkey=yes
+    - name: builds libsodium
+      command: mkdir -p /root/libsodium && cd /root/libsodium && cmake ..
   handlers:
     - name: start nginx
       service: name=nginx state=started
-    - name: restart ntpd
-      service: name=nptd state=restarted
