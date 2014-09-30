@@ -1,0 +1,7 @@
+# something?
+# what's going on?
+
+localhost
+
+[default]
+default ansible_connection=local

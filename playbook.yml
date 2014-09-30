@@ -1,0 +1,20 @@
+---
+- hosts: default
+  remote_user: kostas
+  tasks:
+    - name: install nginx
+      sudo: yes
+      apt: pkg=nginx state=latest
+      notify:
+        - start nginx
+    - name: install git-core
+      sudo: yes
+      apt: pkg=git-core state=latest
+    - name: install build-essential
+      sudo: yes
+      apt: pkg=build-essential state=latest
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+    - name: restart ntpd
+      service: name=nptd state=restarted
